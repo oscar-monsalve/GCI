@@ -1,6 +1,6 @@
 # Grid Convergence Index (GCI)
 
-This code applies the Grid Convergence Index (GCI) method to quantify the grid error for Computational Fluid Dynamics  (CFD) applications.
+This code applies the Grid Convergence Index (GCI) method to quantify the grid error for Computational Fluid Dynamics (CFD) applications.
 
 The code asks the user the following:
 
