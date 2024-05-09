@@ -8,4 +8,4 @@ The program asks the user the following:
 2. The grid's number of cells for the coarse, medium and fine grids.
 3. The CFD solution for the coarse, medium and fine grids.
 
-* Note: this code is at its first implementation iteration, meaning it can be improved.
+Note: this code is at its first implementation iteration, meaning it can be improved.
