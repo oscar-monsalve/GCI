@@ -2,41 +2,37 @@ from prettytable import PrettyTable
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Inputs:
-f = 1/3  # Physical dimension of the problem. Either 1/2 for 2D or 1/3 for 3D geometry
 
-# Grid cell counts
-n1 = 29284657  # Fine grid
-n2 = 3673834   # Medium grid
-n3 = 460712  # Coarse grid
-print()
+f = 1/2  # Physical grid dimension. f=1/2 for 2D, or f=1/3 for 3D
 
-# Representative grid size h
+# Define the grid cell counts
+n1 = 18000  # Fine grid
+n2 = 8000  # Medium grid
+n3 = 4500  # Coarse grid
+
+# Define the representative grid size h
 h1 = (1 / n1) ** f
 h2 = (1 / n2) ** f
 h3 = (1 / n3) ** f
 
 print("The grid size representative values are: ")
-print("h1: ", format(h1, ".4f"))
-print("h2: ", format(h2, ".4f"))
-print("h3: ", format(h3, ".4f"))
+print(f"h1: {h1:.4f}")
+print(f"h2: {h2:.4f}")
+print(f"h3: {h3:.4f}")
 print()
 
 # Define the grid refinement factor r
-
 r21 = h2/h1
 r32 = h3/h2
 
 print("The grid refiment factors are: ")
-print("r21: ", format(r21, ".4f"))
-print("r32: ", format(r32, ".4f"))
-print()
+print(f"r21: {r21:.4f}")
+print(f"r32: {r32:.4f}\n")
 
 # Define the grid solution values
-phi1 = 2783.02  # Solution for fine grid (N1)
-phi2 = 2755.42  # Solution for medium grid (N2)
-phi3 = 2710.8  # Solution for coarse grid (N3)
-print()
+phi1 = 6.063  # Solution for the fine grid
+phi2 = 5.972  # Solution for the medium grid
+phi3 = 5.863  # Solution for the coarse grid
 
 ep21 = phi2-phi1
 ep32 = phi3-phi2
@@ -45,7 +41,7 @@ ep32 = phi3-phi2
 s = 1*np.sign(ep32/ep21)
 
 
-def fixedp(g, x0, tol=1e-6, max_iter=100):
+def fixedp(g, x0: int, tol=1e-6, max_iter=100) -> [float, int]:
     x = x0
     for i in range(max_iter):
         x_next = g(x)
@@ -55,65 +51,54 @@ def fixedp(g, x0, tol=1e-6, max_iter=100):
     raise ValueError(f"Failed to converge after {max_iter} iterations")
 
 
-def g(x):
+def g(x: float) -> float:
     return (1/(np.log(r21)))*(np.abs(np.log(ep32/ep21)+np.log(((r21**x)-s)/((r32**x)-s))))
 
 
 x0 = 1
 x, num_iterations = fixedp(g, x0)
-print(f"The apparent order is p: {x:.4f}. Converged after {num_iterations} iterations")
-print()
+
+print(f"The apparent order is p: {x:.4f}. Converged after {num_iterations} iterations\n")
 
 # Define the extrapolated values
-
 phi21_ext = (((r21**x)*phi1)-phi2)/((r21**x)-1)
 phi32_ext = (((r32**x)*phi2)-phi3)/((r32**x)-1)
 
 print("The extrapolated grid solution values are: ")
-print("phi21_ext: ", format(phi21_ext, ".4f"))
-print("phi32_ext: ", format(phi32_ext, ".4f"))
-print()
+print(f"phi21_ext: {phi21_ext:.4f}")
+print(f"phi32_ext: {phi32_ext:.4f}\n")
 
 # Define the approximate relative errors
-
 e21_a = (np.abs((phi1-phi2)/phi1))*100
 e32_a = (np.abs((phi2-phi3)/phi2))*100
 
 print("The approximate relative errors are: ")
-print("e21_a: " + str(format(e21_a, ".4f")) + " %")
-print("e32_a: " + str(format(e32_a, ".4f")) + " %")
-print()
+print(f"e21_a: {e21_a:.4f} %")
+print(f"e32_a: {e32_a:.4f} %\n")
 
 # Define the extrapolated relative errors
-
 e21_ext = (np.abs((phi21_ext-phi1)/phi21_ext))*100
 e32_ext = (np.abs((phi32_ext-phi2)/phi32_ext))*100
 
 print("The extrapolated relative errors are: ")
-print("e21_ext: ", str(format(e21_ext, ".4f")) + " %")
-print("e32_ext: ", str(format(e32_ext, ".4f")) + " %")
-print()
+print(f"e21_ext: {e21_ext:.4f} %")
+print(f"e32_ext: {e32_ext:.4f} %\n")
 
 # Define the GCI values for the fine and medium grids
-
 GCI21_fine = ((1.25*e21_a)/((r21**x)-1))
 GCI32_medium = ((1.25*e32_a)/((r32**x)-1))
 
 print("The Grid Convergence Index (GCI) values are: ")
-print("GCI21_fine: ", str(format(GCI21_fine, ".4f")) + " %")
-print("GCI32_medium: ", str(format(GCI32_medium, ".4f")) + " %")
-print()
+print(f"GCI21_fine: {GCI21_fine:.4f} %")
+print(f"GCI32_medium: {GCI32_medium:.4f} %\n")
 
 # define the approximate constancy GCI
-
 GCI = (GCI32_medium)/((r21**x) * GCI21_fine)
 
-print("The approximate constancy GCI is: ", format(GCI, ".4f"))
-print()
+print(f"The approximate constancy GCI is: {GCI:.4f}\n")
 print("Note: If GCI is approximately equal to 1, the grid solution is within the asymptotic range of convergence. Thus, no further grid refinement is neccesary.")
 
 # Output table summarizing the GCI results using the package "prettytable".
-
 table = PrettyTable()
 table.field_names = ["Parameters", "Results for grid solution phi"]
 
