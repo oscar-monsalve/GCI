@@ -1,4 +1,11 @@
-from numpy import sign, abs
+# from numpy import sign
+
+
+def sign(x: float) -> int:
+    """
+    Implemented manually the sign function to avoid importing numpy. Numpy was causing problems with pytest.
+    """
+    return (x > 0) - (x < 0)
 
 
 def physical_dimension_prompt() -> float:
