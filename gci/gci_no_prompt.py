@@ -4,14 +4,21 @@ import matplotlib.pyplot as plt
 from prettytable import PrettyTable
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "2d"  # Physical dimension of the grid to analyze. Enter "2d", "2D" or "3d", "3D".
-# Define the grid cell counts
-n1: int = 18000  # Fine grid
-n2: int = 8000  # Medium grid
-n3: int = 4500  # Coarse grid
-phi1: float = 6.063  # CFD solution for the fine grid
-phi2: float = 5.972  # CFD solution for the medium grid
-phi3: float = 5.863  # CFD solution for the coarse grid
+dimension: str = "3d"  # Physical dimension of the grid to analyze. Enter "2d", "2D" or "3d", "3D".
+n1: int = 29284657  # Fine grid cell count
+n2: int = 3673834   # Medium grid cell count
+n3: int = 460712    # Coarse grid cell count
+phi1: float = 2198.56  # CFD solution for the fine grid
+phi2: float = 2152.32  # CFD solution for the medium grid
+phi3: float = 2112.79   # CFD solution for the coarse grid
+
+# ASME GCI study data
+# n1: int = 18000  # Fine grid
+# n2: int = 8000   # Medium grid
+# n3: int = 4500   # Coarse grid
+# phi1: float = 6.063  # CFD solution for the fine grid
+# phi2: float = 5.972  # CFD solution for the medium grid
+# phi3: float = 5.863  # CFD solution for the coarse grid
 # --------------------------------------Inputs--------------------------------------
 
 
