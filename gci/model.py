@@ -18,7 +18,8 @@ def physical_dimension_prompt() -> float:
                 return 1/3
             break
         else:
-            print("Error. Insert a valid argument for the dimensions of the problem. Enter either (2D, 2d), or (3D, 3d).\n")
+            raise TypeError("Insert a valid argument for the dimensions of the problem. Enter either (2D, 2d), or (3D, 3d).\n")
+            # print("Error. Insert a valid argument for the dimensions of the problem. Enter either (2D, 2d), or (3D, 3d).\n")
             continue
 
 
@@ -34,7 +35,7 @@ def physical_dimension_no_prompt(dimension: str) -> float:
     elif dimension == "3D" or dimension == "3d":
         return 1/3
     else:
-        raise TypeError("Error. Insert a valid argument for the dimensions of the problem. Enter either (2D, 2d), or (3D, 3d) as strings.\n")
+        raise TypeError("Insert a valid argument for the dimensions of the problem. Enter either (2D, 2d), or (3D, 3d) as strings.\n")
 
 
 def representative_grid_size(n1: int, n2: int, n3: int, f: float) -> [float, float, float]:
