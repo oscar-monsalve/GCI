@@ -13,22 +13,22 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "3d"
-n1:        int = 29284657
-n2:        int = 3673834
-n3:        int = 46071
-phi1:    float = 2198.56
-phi2:    float = 2152.32
-phi3:    float = 2112.79
+# dimension: str = "3d"
+# n1:        int = 29284657
+# n2:        int = 3673834
+# n3:        int = 46071
+# phi1:    float = 2198.56
+# phi2:    float = 2152.32
+# phi3:    float = 2112.79
 
 # ASME's GCI test data:
-# dimension: str = "2d"
-# n1:        int = 18000
-# n2:        int = 8000
-# n3:        int = 4500
-# phi1:    float = 6.063
-# phi2:    float = 5.972
-# phi3:    float = 5.863
+dimension: str = "2d"
+n1:        int = 18000
+n2:        int = 8000
+n3:        int = 4500
+phi1:    float = 6.063
+phi2:    float = 5.972
+phi3:    float = 5.863
 # --------------------------------------Inputs--------------------------------------
 
 
