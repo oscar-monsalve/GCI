@@ -1,5 +1,3 @@
-# from numpy import sign
-
 def sign(x: float) -> int:
     """
     Implemented manually the sign function to avoid importing numpy. Numpy was causing problems with pytest.

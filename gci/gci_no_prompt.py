@@ -1,29 +1,38 @@
-from numpy import log, abs
-import model
+# Inputs description:
+# 'dimension': Physical dimension of the grid to analyze. Enter "2d", "2D" or "3d", "3D".
+# 'n1':        Fine grid cell count
+# 'n2':        Medium grid cell count
+# 'n3':        Coarse grid cell count
+# 'phi1':      CFD solution for the fine gri
+# 'phi2':      CFD solution for the medium grid
+# 'phi3':      CFD solution for the coarse grid
+
+from numpy import log
 import matplotlib.pyplot as plt
 from prettytable import PrettyTable
+import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "3d"  # Physical dimension of the grid to analyze. Enter "2d", "2D" or "3d", "3D".
-n1: int = 29284657  # Fine grid cell count
-n2: int = 3673834   # Medium grid cell count
-n3: int = 460712    # Coarse grid cell count
-phi1: float = 2198.56  # CFD solution for the fine grid
-phi2: float = 2152.32  # CFD solution for the medium grid
-phi3: float = 2112.79   # CFD solution for the coarse grid
+dimension: str = "3d"
+n1:        int = 29284657
+n2:        int = 3673834
+n3:        int = 46071
+phi1:    float = 2198.56
+phi2:    float = 2152.32
+phi3:    float = 2112.79
 
-# ASME GCI study data
-# n1: int = 18000  # Fine grid
-# n2: int = 8000   # Medium grid
-# n3: int = 4500   # Coarse grid
-# phi1: float = 6.063  # CFD solution for the fine grid
-# phi2: float = 5.972  # CFD solution for the medium grid
-# phi3: float = 5.863  # CFD solution for the coarse grid
+# ASME's GCI test data:
+# dimension: str = "2d"
+# n1:        int = 18000
+# n2:        int = 8000
+# n3:        int = 4500
+# phi1:    float = 6.063
+# phi2:    float = 5.972
+# phi3:    float = 5.863
 # --------------------------------------Inputs--------------------------------------
 
 
 def main() -> None:
-    # Calculations
     f = model.physical_dimension_no_prompt(dimension)
     h1, h2, h3 = model.representative_grid_size(n1, n2, n3, f)
     r21, r32 = model.refinement_factor(h1, h2, h3)
@@ -76,15 +85,15 @@ def main() -> None:
     table.add_row(["phi1",              f"{phi3:.4f}",          "Coarse grid numerical solution"])
     table.add_row(["p",                 f"{aparent_order:.4f}", "Aparent oder"])
     table.add_row(["phi_ext",           f"{phi21_ext:.4f}",     "Extrapolated solution"])
-    table.add_row(["e_21_a (%)",        f"{e21_a:.4f}",        "Medium-to-fine approximate relative error"])
-    table.add_row(["e_32_a (%)",        f"{e21_a:.4f}",        "Coarse-to-medium approximate relative error"])
-    table.add_row(["e_21_ext (%)",      f"{e21_ext:.4f}",      "Medium-to-fine extrapolated relative error"])
-    table.add_row(["e_32_ext (%)",      f"{e32_ext:.4f}",      "Coarse-to-medium extrapolated relative error"])
-    table.add_row(["GCI_21_fine (%)",   f"{gci21_fine:.4f}",   "Fine grid convergence index result"])
-    table.add_row(["GCI_32_medium (%)", f"{gci32_medium:.4f}", "Medium grid convergence index result"])
+    table.add_row(["e_21_a (%)",        f"{e21_a:.4f}",         "Medium-to-fine approximate relative error"])
+    table.add_row(["e_32_a (%)",        f"{e21_a:.4f}",         "Coarse-to-medium approximate relative error"])
+    table.add_row(["e_21_ext (%)",      f"{e21_ext:.4f}",       "Medium-to-fine extrapolated relative error"])
+    table.add_row(["e_32_ext (%)",      f"{e32_ext:.4f}",       "Coarse-to-medium extrapolated relative error"])
+    table.add_row(["GCI_21_fine (%)",   f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
+    table.add_row(["GCI_32_medium (%)", f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
     # table.add_row(["GCI", format(GCI, ".4f")])
     print()
-    print("The following table summarizes the Grid Convergence Index (GCI) results:")
+    print("Grid Convergence Index (GCI) results:")
     print(table)
 
     # Define the variable f to a string to print on the plot result

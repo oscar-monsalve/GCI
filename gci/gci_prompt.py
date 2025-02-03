@@ -1,7 +1,7 @@
-from numpy import log, abs
-import model
+from numpy import log
 import matplotlib.pyplot as plt
 from prettytable import PrettyTable
+import model
 
 
 def main() -> None:
@@ -88,15 +88,15 @@ def main() -> None:
         table.add_row(["phi1",              f"{phi3:.4f}",          "Coarse grid numerical solution"])
         table.add_row(["p",                 f"{aparent_order:.4f}", "Aparent oder"])
         table.add_row(["phi_ext",           f"{phi21_ext:.4f}",     "Extrapolated solution"])
-        table.add_row(["e_21_a (%)",        f"{e21_a:.4f}",        "Medium-to-fine approximate relative error"])
-        table.add_row(["e_32_a (%)",        f"{e21_a:.4f}",        "Coarse-to-medium approximate relative error"])
-        table.add_row(["e_21_ext (%)",      f"{e21_ext:.4f}",      "Medium-to-fine extrapolated relative error"])
-        table.add_row(["e_32_ext (%)",      f"{e32_ext:.4f}",      "Coarse-to-medium extrapolated relative error"])
-        table.add_row(["GCI_21_fine (%)",   f"{gci21_fine:.4f}",   "Fine grid convergence index result"])
-        table.add_row(["GCI_32_medium (%)", f"{gci32_medium:.4f}", "Medium grid convergence index result"])
+        table.add_row(["e_21_a (%)",        f"{e21_a:.4f}",         "Medium-to-fine approximate relative error"])
+        table.add_row(["e_32_a (%)",        f"{e21_a:.4f}",         "Coarse-to-medium approximate relative error"])
+        table.add_row(["e_21_ext (%)",      f"{e21_ext:.4f}",       "Medium-to-fine extrapolated relative error"])
+        table.add_row(["e_32_ext (%)",      f"{e32_ext:.4f}",       "Coarse-to-medium extrapolated relative error"])
+        table.add_row(["GCI_21_fine (%)",   f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
+        table.add_row(["GCI_32_medium (%)", f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
         # table.add_row(["GCI", format(GCI, ".4f")])
         print()
-        print("The following table summarizes the Grid Convergence Index (GCI) results:")
+        print("Grid Convergence Index (GCI) results:")
         print(table)
 
         # Define the variable f to a string to print on the plot
