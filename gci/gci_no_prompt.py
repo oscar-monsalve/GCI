@@ -13,22 +13,22 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-# dimension: str = "3d"
-# n1:        int = 29284657
-# n2:        int = 3673834
-# n3:        int = 46071
-# phi1:    float = 2198.56
-# phi2:    float = 2152.32
-# phi3:    float = 2112.79
+dimension: str = "3d"
+n1:        int = 29284657
+n2:        int = 3673834
+n3:        int = 58152
+phi1:    float = 2511.4525
+phi2:    float = 2478.9625
+phi3:    float = 2358.71
 
 # ASME's GCI test data:
-dimension: str = "2d"
-n1:        int = 18000
-n2:        int = 8000
-n3:        int = 4500
-phi1:    float = 6.063
-phi2:    float = 5.972
-phi3:    float = 5.863
+# dimension: str = "2d"
+# n1:        int = 18000
+# n2:        int = 8000
+# n3:        int = 4500
+# phi1:    float = 6.063
+# phi2:    float = 5.972
+# phi3:    float = 5.863
 # --------------------------------------Inputs--------------------------------------
 
 
@@ -62,7 +62,7 @@ def main() -> None:
         Args:
         init_value: iteration variable obtained from the fixed-point iteration.
         """
-        return (1/(log(r21)))*(abs(log(ep32/ep21)+log(((r21**init_value)-s)/((r32**init_value)-s))))
+        return (1/(log(r21))) * abs(log(abs(ep32/ep21)) + log(((r21**init_value)-s)/((r32**init_value)-s)))
 
     init_value = 1  # Initial value for used in the fixed-point iteration process
     aparent_order, num_iterations = fixed_point_iter(apparent_order_function, init_value)
