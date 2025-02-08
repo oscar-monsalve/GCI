@@ -19,4 +19,4 @@ Note: this code is at its first implementation iteration, meaning it can be impr
 - prettytable
 - matplotlib
 - numpy
-- optional: pytest (for testing).
+- pytest (optional for testing).
