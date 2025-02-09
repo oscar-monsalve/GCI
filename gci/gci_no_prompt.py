@@ -36,7 +36,8 @@
 # phi2:    float = 5.9624
 # phi3:    float = 6.0909
 
-# ---Input 3d grid data examples from master thesis (https://repositorio.itm.edu.co/handle/20.500.12622/6477)---
+# ----Input 3d grid data examples from master thesis (https://repositorio.itm.edu.co/handle/20.500.12622/6477)----
+# 3d grid monotonic convergence:
 # dimension: str = "3d"
 # n1:        int = 2583006
 # n2:        int = 678911
@@ -96,7 +97,7 @@ def main() -> None:
     table.add_row(["phi1",              f"{phi1:.4f}",          "Fine grid numerical solution"])
     table.add_row(["phi2",              f"{phi2:.4f}",          "Medium grid numerical solution"])
     table.add_row(["phi1",              f"{phi3:.4f}",          "Coarse grid numerical solution"])
-    table.add_row(["p",                 f"{aparent_order}", "Aparent oder"])
+    table.add_row(["p",                 f"{aparent_order:.4f}", "Aparent oder"])
     table.add_row(["phi_ext",           f"{phi21_ext:.4f}",     "Extrapolated solution"])
     table.add_row(["e_21_a (%)",        f"{e21_a:.4f}",         "Medium-to-fine approximate relative error"])
     table.add_row(["e_32_a (%)",        f"{e21_a:.4f}",         "Coarse-to-medium approximate relative error"])
