@@ -67,7 +67,7 @@ def sign(x: float) -> int:
 def sign_calculation(phi1: float, phi2: float, phi3: float) -> [float, float, float]:
     """
     Returns the difference of the CFD solutions between the medium-to-fine grid (ep21) and the coarse-to-medium grid
-    (ep32).
+    (ep32), and the sign value "s".
 
     Args:
     phi1, phi2, phi3: fine, medium and coarse grid solutions, respectively.

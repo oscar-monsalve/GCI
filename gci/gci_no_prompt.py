@@ -8,8 +8,8 @@
 # 'phi2':      CFD solution for the medium grid
 # 'phi3':      CFD solution for the coarse grid
 
-# ----Test data from ASME's article https://doi.org/10.1115/1.2960953----
-# ASME's GCI test data (2d) monotonic convergence:
+# ----Input data examples from ASME's article (https://doi.org/10.1115/1.2960953)----
+# 2d grid monotonic convergence:
 # dimension: str = "2d"
 # n1:        int = 18000
 # n2:        int = 8000
@@ -18,7 +18,7 @@
 # phi2:    float = 5.972
 # phi3:    float = 5.863
 
-# ASME's GCI test data (2d) p<1:
+# 2d p-value<1 monotonic convergence:
 # dimension: str = "2d"
 # n1:        int = 18000
 # n2:        int = 4500
@@ -27,7 +27,7 @@
 # phi2:    float = 10.7250
 # phi3:    float = 10.6050
 
-# ASME's GCI test data (2d) oscillatory convergence:
+# 2d grid oscillatory convergence:
 # dimension: str = "2d"
 # n1:        int = 18000
 # n2:        int = 4500
@@ -35,6 +35,15 @@
 # phi1:    float = 6.0042
 # phi2:    float = 5.9624
 # phi3:    float = 6.0909
+
+# ---Input 3d grid data examples from master thesis (https://repositorio.itm.edu.co/handle/20.500.12622/6477)---
+# dimension: str = "3d"
+# n1:        int = 2583006
+# n2:        int = 678911
+# n3:        int = 93188
+# phi1:    float = 1.05100
+# phi2:    float = 1.03460
+# phi3:    float = 0.88580
 # --------------------------------------Grid Convergence Index (GCI)--------------------------------------
 
 import matplotlib.pyplot as plt
@@ -42,13 +51,13 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "2d"
-n1:        int = 18000
-n2:        int = 8000
-n3:        int = 4500
-phi1:    float = 6.063
-phi2:    float = 5.972
-phi3:    float = 5.863
+dimension: str = "3d"
+n1:        int = 2583006
+n2:        int = 678911
+n3:        int = 93188
+phi1:    float = 1.05100
+phi2:    float = 1.03460
+phi3:    float = 0.88580
 # --------------------------------------Inputs--------------------------------------
 
 
@@ -66,7 +75,7 @@ def main() -> None:
         Args:
         x: iteration value needed in "apparent_order_function" within the "fixed_point_iter" function.
        """
-        return model.apparent_order_function(x, r21, r32, s, ep21, ep32)
+        return model.apparent_order_function(x, r21, r32, ep21, ep32, s)
 
     init_value = 1  # Initial value for used in the fixed-point iteration process
     aparent_order, num_iterations = model.fixed_point_iter(apparent_order_wrapper, init_value)
