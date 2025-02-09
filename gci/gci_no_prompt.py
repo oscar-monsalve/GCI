@@ -13,15 +13,15 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "3d"
-n1:        int = 29284657
-n2:        int = 3673834
-n3:        int = 58152
-phi1:    float = 2511.4525
-phi2:    float = 2478.9625
-phi3:    float = 2358.71
+dimension: str = "2d"
+n1:        int = 18000
+n2:        int = 4500
+n3:        int = 980
+phi1:    float = 10.7880
+phi2:    float = 10.7250
+phi3:    float = 10.6050
 
-# ASME's GCI test data:
+# ASME's GCI test data (2d) monotonic convergence:
 # dimension: str = "2d"
 # n1:        int = 18000
 # n2:        int = 8000
@@ -29,12 +29,24 @@ phi3:    float = 2358.71
 # phi1:    float = 6.063
 # phi2:    float = 5.972
 # phi3:    float = 5.863
+
+# ASME's GCI test data (2d) p<1:
+# dimension: str = "2d"
+# n1:        int = 18000
+# n2:        int = 4500
+# n3:        int = 980
+# phi1:    float = 10.7880
+# phi2:    float = 10.7250
+# phi3:    float = 10.6050
 # --------------------------------------Inputs--------------------------------------
 
 
 def main() -> None:
     f = model.physical_dimension_no_prompt(dimension)
     h1, h2, h3 = model.representative_grid_size(n1, n2, n3, f)
+    print(f"h1: {h1}")
+    print(f"h2: {h2}")
+    print(f"h3: {h3}")
     r21, r32 = model.refinement_factor(h1, h2, h3)
     ep21, ep32, s = model.sign_calculation(phi1, phi2, phi3)
 
