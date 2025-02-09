@@ -1,4 +1,3 @@
-from numpy import log
 import matplotlib.pyplot as plt
 from prettytable import PrettyTable
 import model
@@ -29,34 +28,18 @@ def main() -> None:
         # Define the apparent order p by fixed-point iteration
         ep21, ep32, s = model.sign_calculation(phi1, phi2, phi3)
 
-        def fixed_point_iter(apparent_order_function, init_value: int, tol=1e-6, max_iter=100) -> [float, int]:
+        def apparent_order_wrapper(x):
             """
-            Performs a fixed-point iteration and returns its result and the iteration step if within specified tolerance and number of iterations.
+            Since the "fixed_point_iter" function expects a function with a single argument, this wrapper function is
+            defined to pass the additional parameters required.
 
             Args:
-            aparent_order: function of interest to iterate over it. In this case is the aparent order function.
-            init_value: starting point of the iteration process. For the aparent order function, "init_value" could be 1.
-            tol, max_iter: stop criteria of the iteration process.
+            x: iteration value needed in "apparent_order_function" within the "fixed_point_iter" function.
             """
-            x = init_value
-            for i in range(max_iter):
-                x_next = apparent_order_function(x)
-                if abs(x_next-x) < tol:
-                    return x_next, i
-                x = x_next
-            raise ValueError(f"Failed to converge after {max_iter} iterations")
-
-        def apparent_order_function(init_value: int) -> float:
-            """
-            Returns the aparent order p.
-
-            Args:
-            init_value: iteration variable obtained from the fixed-point iteration.
-            """
-            return (1/(log(r21)))*(abs(log(ep32/ep21)+log(((r21**init_value)-s)/((r32**init_value)-s))))
+            return model.apparent_order_function(x, r21, r32, ep21, ep32, s)
 
         init_value = 1
-        aparent_order, num_iterations = fixed_point_iter(apparent_order_function, init_value)
+        aparent_order, num_iterations = model.fixed_point_iter(apparent_order_wrapper, init_value)
 
         # Define the extrapolated values
         phi21_ext, phi32_ext = model.extrapolated_values(phi1, phi2, phi3, r21, r32, aparent_order)
