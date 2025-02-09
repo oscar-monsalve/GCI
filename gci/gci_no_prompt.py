@@ -1,4 +1,5 @@
-# Inputs description:
+# --------------------------------------Grid Convergence Index (GCI)--------------------------------------
+# ----Input description----
 # 'dimension': Physical dimension of the grid to analyze. Enter "2d", "2D" or "3d", "3D".
 # 'n1':        Fine grid cell count
 # 'n2':        Medium grid cell count
@@ -7,20 +8,7 @@
 # 'phi2':      CFD solution for the medium grid
 # 'phi3':      CFD solution for the coarse grid
 
-from numpy import log
-import matplotlib.pyplot as plt
-from prettytable import PrettyTable
-import model
-
-# --------------------------------------Inputs--------------------------------------
-dimension: str = "2d"
-n1:        int = 18000
-n2:        int = 4500
-n3:        int = 980
-phi1:    float = 10.7880
-phi2:    float = 10.7250
-phi3:    float = 10.6050
-
+# ----Test data from ASME's article https://doi.org/10.1115/1.2960953----
 # ASME's GCI test data (2d) monotonic convergence:
 # dimension: str = "2d"
 # n1:        int = 18000
@@ -38,46 +26,50 @@ phi3:    float = 10.6050
 # phi1:    float = 10.7880
 # phi2:    float = 10.7250
 # phi3:    float = 10.6050
+
+# ASME's GCI test data (2d) oscillatory convergence:
+# dimension: str = "2d"
+# n1:        int = 18000
+# n2:        int = 4500
+# n3:        int = 980
+# phi1:    float = 6.0042
+# phi2:    float = 5.9624
+# phi3:    float = 6.0909
+# --------------------------------------Grid Convergence Index (GCI)--------------------------------------
+
+import matplotlib.pyplot as plt
+from prettytable import PrettyTable
+import model
+
+# --------------------------------------Inputs--------------------------------------
+dimension: str = "2d"
+n1:        int = 18000
+n2:        int = 8000
+n3:        int = 4500
+phi1:    float = 6.063
+phi2:    float = 5.972
+phi3:    float = 5.863
 # --------------------------------------Inputs--------------------------------------
 
 
 def main() -> None:
     f = model.physical_dimension_no_prompt(dimension)
     h1, h2, h3 = model.representative_grid_size(n1, n2, n3, f)
-    print(f"h1: {h1}")
-    print(f"h2: {h2}")
-    print(f"h3: {h3}")
     r21, r32 = model.refinement_factor(h1, h2, h3)
     ep21, ep32, s = model.sign_calculation(phi1, phi2, phi3)
 
-    def fixed_point_iter(apparent_order_function, init_value: int, tol=1e-6, max_iter=100) -> [float, int]:
+    def apparent_order_wrapper(x):
         """
-        Performs a fixed-point iteration and returns its result and the iteration step if within specified tolerance and number of iterations.
+        Since the "fixed_point_iter" function expects a function with a single argument, this wrapper function is
+        defined to pass the additional parameters required.
 
         Args:
-        aparent_order: function of interest to iterate over it. In this case is the aparent order function.
-        init_value: starting point of the iteration process. For the aparent order function, "init_value" could be 1.
-        tol, max_iter: stop criteria of the iteration process.
-        """
-        x = init_value
-        for i in range(max_iter):
-            x_next = apparent_order_function(x)
-            if abs(x_next-x) < tol:
-                return x_next, i
-            x = x_next
-        raise ValueError(f"Failed to converge after {max_iter} iterations")
-
-    def apparent_order_function(init_value: int) -> float:
-        """
-        Returns the aparent order p.
-
-        Args:
-        init_value: iteration variable obtained from the fixed-point iteration.
-        """
-        return (1/(log(r21))) * abs(log(abs(ep32/ep21)) + log(((r21**init_value)-s)/((r32**init_value)-s)))
+        x: iteration value needed in "apparent_order_function" within the "fixed_point_iter" function.
+       """
+        return model.apparent_order_function(x, r21, r32, s, ep21, ep32)
 
     init_value = 1  # Initial value for used in the fixed-point iteration process
-    aparent_order, num_iterations = fixed_point_iter(apparent_order_function, init_value)
+    aparent_order, num_iterations = model.fixed_point_iter(apparent_order_wrapper, init_value)
     phi21_ext, phi32_ext = model.extrapolated_values(phi1, phi2, phi3, r21, r32, aparent_order)  # Extrapolated CFD solutions
     e21_a, e32_a = model.approximate_relative_errors(phi1, phi2, phi3)  # Approximate relative errors
     e21_ext, e32_ext = model.extrapolated_relative_errors(phi1, phi2, phi21_ext, phi32_ext)  # Define the extrapolated relative errors
@@ -95,7 +87,7 @@ def main() -> None:
     table.add_row(["phi1",              f"{phi1:.4f}",          "Fine grid numerical solution"])
     table.add_row(["phi2",              f"{phi2:.4f}",          "Medium grid numerical solution"])
     table.add_row(["phi1",              f"{phi3:.4f}",          "Coarse grid numerical solution"])
-    table.add_row(["p",                 f"{aparent_order:.4f}", "Aparent oder"])
+    table.add_row(["p",                 f"{aparent_order}", "Aparent oder"])
     table.add_row(["phi_ext",           f"{phi21_ext:.4f}",     "Extrapolated solution"])
     table.add_row(["e_21_a (%)",        f"{e21_a:.4f}",         "Medium-to-fine approximate relative error"])
     table.add_row(["e_32_a (%)",        f"{e21_a:.4f}",         "Coarse-to-medium approximate relative error"])

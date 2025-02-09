@@ -1,8 +1,4 @@
-def sign(x: float) -> int:
-    """
-    Implemented manually the sign function to avoid importing numpy. Numpy was causing problems with pytest.
-    """
-    return (x > 0) - (x < 0)
+from math import log
 
 
 def physical_dimension_prompt() -> float:
@@ -61,11 +57,56 @@ def refinement_factor(h1: float, h2: float, h3: float) -> [float, float]:
     return r21, r32
 
 
+def sign(x: float) -> int:
+    """
+    Implemented manually the sign function to avoid importing numpy. Numpy was causing problems with pytest.
+    """
+    return (x > 0) - (x < 0)
+
+
 def sign_calculation(phi1: float, phi2: float, phi3: float) -> [float, float, float]:
+    """
+    Returns the difference of the CFD solutions between the medium-to-fine grid (ep21) and the coarse-to-medium grid
+    (ep32).
+
+    Args:
+    phi1, phi2, phi3: fine, medium and coarse grid solutions, respectively.
+    """
     ep21 = phi2-phi1
     ep32 = phi3-phi2
     s = 1*sign(ep32/ep21)
     return ep21, ep32, s
+
+
+def fixed_point_iter(apparent_order_function, init_value: int, tol=1e-6, max_iter=100) -> [float, int]:
+    """
+    Performs a fixed-point iteration and returns its result and the iteration step if within specified tolerance and number of iterations.
+
+    Args:
+    aparent_order: function of interest to iterate over it. In this case is the aparent order function.
+    init_value: starting point of the iteration process. For the aparent order function, "init_value" could be 1.
+    tol, max_iter: stop criteria of the iteration process.
+    """
+    x = init_value
+    for i in range(max_iter):
+        x_next = apparent_order_function(x)
+        if abs(x_next-x) < tol:
+            return x_next, i
+        x = x_next
+    raise ValueError(f"Failed to converge after {max_iter} iterations")
+
+
+def apparent_order_function(init_value: int, r21: float, r32: float, ep21: float, ep32: float, s: int) -> float:
+    """
+    Returns the aparent order p.
+
+    Args:
+    init_value: iteration variable obtained from the fixed-point iteration.
+    r21, r32: grid refinement factors.
+    ep21, ep32: medium-to-fine and coarse-to-medium grid solution differences, respectively.
+    s: obtained from the sign function.
+    """
+    return (1/(log(r21))) * abs(log(abs(ep32/ep21)) + log(((r21**init_value)-s)/((r32**init_value)-s)))
 
 
 def extrapolated_values(phi1: float, phi2: float, phi3: float, r21: float, r32: float, aparent_order: float) -> [float, float]:
