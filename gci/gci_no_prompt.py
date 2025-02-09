@@ -75,7 +75,7 @@ def main() -> None:
 
         Args:
         x: iteration value needed in "apparent_order_function" within the "fixed_point_iter" function.
-       """
+        """
         return model.apparent_order_function(x, r21, r32, ep21, ep32, s)
 
     init_value = 1  # Initial value for used in the fixed-point iteration process
