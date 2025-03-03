@@ -26,7 +26,7 @@ def test_2d_low_p_grid_size_h():
 
 
 def test_3dgrid_sizes_h_magnitude():
-    """Data from master thesis at https://repositorio.itm.edu.co/handle/20.500.12622/6477"""
+    """Data from master thesis at monotonic"""
     h1, h2, h3 = representative_grid_size(2583006, 678911, 93188, 1/3)
     assert h1 < h2
     assert h2 < h3

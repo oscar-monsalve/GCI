@@ -13,7 +13,6 @@ def physical_dimension_prompt() -> float:
             break
         else:
             raise TypeError("Insert a valid argument for the dimensions of the problem. Enter either (2D, 2d), or (3D, 3d).\n")
-            # print("Error. Insert a valid argument for the dimensions of the problem. Enter either (2D, 2d), or (3D, 3d).\n")
             continue
 
 
