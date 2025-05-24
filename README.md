@@ -20,3 +20,9 @@ Note: this code is at its first implementation iteration, meaning it can be impr
 - matplotlib
 - numpy
 - pytest (optional for testing).
+
+
+# TODO
+
+- [ ] Add convergence condition (monotonic convergence, oscillatory conv, etc).
+- [ ] Add asymptotic range.
