@@ -24,5 +24,6 @@ Note: this code is at its first implementation iteration, meaning it can be impr
 
 # TODO
 
-- [ ] Add convergence condition (monotonic convergence, oscillatory conv, etc).
+- [ ] Add convergence condition (monotonic convergence, oscillatory conv, etc). If divergent print warning.
 - [ ] Add asymptotic range.
+- [ ] Add latex, word, markdown tables for reporting results.
