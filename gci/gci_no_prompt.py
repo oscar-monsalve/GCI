@@ -52,9 +52,9 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "2d"
+dimension: str = "3d"
 n1:        int = 18000
-n2:        int = 5000
+n2:        int = 8000
 n3:        int = 4500
 phi1:    float = 6.063
 phi2:    float = 5.972
@@ -112,10 +112,20 @@ def main() -> None:
     print(table)
 
     # Define the variable f to a string to print on the plot result
-    if f == 1/2:
-        f_print = "1/2"
-    if f == 1/3:
-        f_print = "1/3"
+    match f:
+        case 1:
+            f_print = "1"
+        case 0.5:
+            f_print = "1/2"
+        case 0.3333333333333333:
+            f_print = "1/3"
+        case _:
+            raise ValueError("f value is unreachable and cannot be defined.")
+
+    # if f == 1/2:
+    #     f_print = "1/2"
+    # if f == 1/3:
+    #     f_print = "1/3"
 
     # Plotting the grid size h vs. the solution grid value phi
     hi = [h1, h2, h3]

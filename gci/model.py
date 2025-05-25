@@ -60,9 +60,9 @@ def refinement_factor(h1: float, h2: float, h3: float) -> [float, float]:
 
 def check_refinement_factor(r21: float, r32: float) -> None:
     if r21 <= 1.3:
-        logging.warning(f"it is recommended that r21: {r21:.2f} is greater than 1.3.")
+        logging.warning(f"It is recommended that r21: {r21:.2f} is greater than 1.3.")
     elif r32 <= 1.3:
-        logging.warning(f"it is recommended that r32: {r32:.2f} is greater than 1.3.")
+        logging.warning(f"It is recommended that r32: {r32:.2f} is greater than 1.3.")
     else:
         return
 
