@@ -52,13 +52,13 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "3d"
-n1:        int = 2583006
-n2:        int = 678911
-n3:        int = 93188
-phi1:    float = 1.05100
-phi2:    float = 1.03460
-phi3:    float = 0.88580
+dimension: str = "2d"
+n1:        int = 18000
+n2:        int = 5000
+n3:        int = 4500
+phi1:    float = 6.063
+phi2:    float = 5.972
+phi3:    float = 5.863
 # --------------------------------------Inputs--------------------------------------
 
 
@@ -66,6 +66,7 @@ def main() -> None:
     f = model.physical_dimension_no_prompt(dimension)
     h1, h2, h3 = model.representative_grid_size(n1, n2, n3, f)
     r21, r32 = model.refinement_factor(h1, h2, h3)
+    model.check_refinement_factor(r21, r32)
     ep21, ep32, s = model.sign_calculation(phi1, phi2, phi3)
 
     def apparent_order_wrapper(x):

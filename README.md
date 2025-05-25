@@ -24,6 +24,7 @@ Note: this code is at its first implementation iteration, meaning it can be impr
 
 # TODO
 
+- [ ] Add warnings for refinement ratio (r>1.3).
 - [ ] Add calculations for 1D geometries.
 - [ ] Add convergence condition (monotonic convergence, oscillatory conv, etc). If divergent print warning.
 - [ ] Add asymptotic range.
