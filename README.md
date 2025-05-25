@@ -24,6 +24,10 @@ Note: this code is at its first implementation iteration, meaning it can be impr
 
 # TODO
 
+- [ ] Add calculations for 1D geometries.
 - [ ] Add convergence condition (monotonic convergence, oscillatory conv, etc). If divergent print warning.
 - [ ] Add asymptotic range.
 - [ ] Add latex, word, markdown tables for reporting results.
+- [ ] Calculate results for more than one CFD solution at a time.
+- [ ] Add calculations for variable length, area or volume for the simulation domain.
+- [ ] Add calculation for local GCI to report error bars on a result along a plane/profile/surface (Last part of Celik, et al.)
