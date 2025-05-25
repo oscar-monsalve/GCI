@@ -1,4 +1,3 @@
-import warnings
 import logging
 from math import log
 
@@ -59,9 +58,8 @@ def refinement_factor(h1: float, h2: float, h3: float) -> [float, float]:
     return r21, r32
 
 
-def check_refinement_factor(r21, r32: float) -> None:
+def check_refinement_factor(r21: float, r32: float) -> None:
     if r21 <= 1.3:
-        # warnings.warn(f"It is recommended that r21: {r21} and r32: {r32} are greater than 1.3")
         logging.warning(f"it is recommended that r21: {r21:.2f} is greater than 1.3.")
     elif r32 <= 1.3:
         logging.warning(f"it is recommended that r32: {r32:.2f} is greater than 1.3.")
