@@ -52,13 +52,13 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "2"
+dimension: str = "3"
 n1:        int = 18000
 n2:        int = 8000
 n3:        int = 4500
-phi1:    float = 6.0042
-phi2:    float = 5.9624
-phi3:    float = 6.0909
+phi1:    float = 6.063
+phi2:    float = 5.972
+phi3:    float = 5.863
 # --------------------------------------Inputs--------------------------------------
 
 
