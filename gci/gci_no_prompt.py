@@ -66,7 +66,6 @@ def main() -> None:
     f = model.physical_dimension_no_prompt(dimension)
     h1, h2, h3 = model.representative_grid_size(n1, n2, n3, f)
     r21, r32 = model.refinement_factor(h1, h2, h3)
-    model.check_refinement_factor(r21, r32)
     ep21, ep32, s = model.sign_calculation(phi1, phi2, phi3)
 
     def apparent_order_wrapper(x):
@@ -111,21 +110,16 @@ def main() -> None:
     print("Grid Convergence Index (GCI) results:")
     print(table)
 
-    # Define the variable f to a string to print on the plot result
-    match f:
-        case 1:
-            f_print = "1"
-        case 0.5:
-            f_print = "1/2"
-        case 0.3333333333333333:
-            f_print = "1/3"
-        case _:
-            raise ValueError("f value is unreachable and cannot be defined.")
+    # Check GCI conditions
+    model.check_refinement_factor(r21, r32)
 
-    # if f == 1/2:
-    #     f_print = "1/2"
-    # if f == 1/3:
-    #     f_print = "1/3"
+    # Assign the variable f to a string to print on the plot result
+    if f == 1:
+        f_print = ""
+    if f == 1/2:
+        f_print = "2/2"
+    if f == 1/3:
+        f_print = "1/3"
 
     # Plotting the grid size h vs. the solution grid value phi
     hi = [h1, h2, h3]
