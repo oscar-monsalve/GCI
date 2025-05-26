@@ -77,7 +77,7 @@ def sign(x: float) -> int:
     return (x > 0) - (x < 0)
 
 
-def sign_calculation(phi1: float, phi2: float, phi3: float) -> [float, float, float]:
+def epsilon_and_sign_calculation(phi1: float, phi2: float, phi3: float) -> [float, float, float]:
     """
     Returns the difference of the CFD solutions between the medium-to-fine grid (ep21) and the coarse-to-medium grid
     (ep32), and the sign value "s".
@@ -89,6 +89,24 @@ def sign_calculation(phi1: float, phi2: float, phi3: float) -> [float, float, fl
     ep32 = phi3-phi2
     s = 1*sign(ep32/ep21)
     return ep21, ep32, s
+
+
+def check_convergence_condition(ep21: float, ep32: float) -> None:
+    convergence_condition = ep21 / ep32
+
+    # Monotonic convergence
+    if convergence_condition > 0 and convergence_condition < 1:
+        print("Monotonic convergence detected. The GCI results should be acceptable in terms of working intent.")
+    # Oscillatory convergence
+    elif convergence_condition > -1 and convergence_condition < 0:
+        warning("Oscillatory convergence detected. For these cases, the GCI results might be fine, but sometimes it could increase the uncertainty of the results.")
+        warning("If the GCI results are not satisfactory, it is recommended to remesh and aim for monotonic convergence.")
+    # Monotonic divergence
+    elif convergence_condition > 1:
+        warning("Monotonic divergence detected. It is recommended to remesh and aim for a monotonic convergence solution.")
+    # Oscillatory divergence
+    elif convergence_condition < -1:
+        warning("Oscillatory divergence detected. It is recommended to remesh and aim for a monotonic convergence solution.")
 
 
 def fixed_point_iter(apparent_order_function, init_value: int, tol=1e-6, max_iter=100) -> [float, int]:

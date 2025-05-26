@@ -26,7 +26,7 @@ def main() -> None:
         phi3 = float(input("Enter the grid solution value for the coarse grid N3: "))
 
         # Define the apparent order p by fixed-point iteration
-        ep21, ep32, s = model.sign_calculation(phi1, phi2, phi3)
+        ep21, ep32, s = model.epsilon_and_sign_calculation(phi1, phi2, phi3)
 
         def apparent_order_wrapper(x):
             """

@@ -52,13 +52,13 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "1"
+dimension: str = "2"
 n1:        int = 18000
 n2:        int = 8000
 n3:        int = 4500
-phi1:    float = 6.063
-phi2:    float = 5.972
-phi3:    float = 5.863
+phi1:    float = 6.0042
+phi2:    float = 5.9624
+phi3:    float = 6.0909
 # --------------------------------------Inputs--------------------------------------
 
 
@@ -66,7 +66,7 @@ def main() -> None:
     f = model.physical_dimension_no_prompt(dimension)
     h1, h2, h3 = model.representative_grid_size(n1, n2, n3, f)
     r21, r32 = model.refinement_factor(h1, h2, h3)
-    ep21, ep32, s = model.sign_calculation(phi1, phi2, phi3)
+    ep21, ep32, s = model.epsilon_and_sign_calculation(phi1, phi2, phi3)
 
     def apparent_order_wrapper(x):
         """
@@ -105,6 +105,7 @@ def main() -> None:
     table.add_row(["e_32_ext (%)",      f"{e32_ext:.4f}",       "Coarse-to-medium extrapolated relative error"])
     table.add_row(["GCI_21_fine (%)",   f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
     table.add_row(["GCI_32_medium (%)", f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
+    table.add_row(["Notes:", "", ""])
     # table.add_row(["GCI", format(GCI, ".4f")])
     print()
     print("Grid Convergence Index (GCI) results:")
@@ -112,12 +113,13 @@ def main() -> None:
 
     # Check GCI conditions
     model.check_refinement_factor(r21, r32)
+    model.check_convergence_condition(ep21, ep32)
 
     # Assign the variable f to a string to print on the plot result
     if f == 1:
         f_print = ""
     if f == 1/2:
-        f_print = "2/2"
+        f_print = "1/2"
     if f == 1/3:
         f_print = "1/3"
 
@@ -171,7 +173,6 @@ def main() -> None:
     )
 
     plt.show()
-    pass
 
 
 if __name__ == "__main__":

@@ -1,9 +1,9 @@
-from gci.model import representative_grid_size, refinement_factor, sign_calculation
+from gci.model import representative_grid_size, refinement_factor, epsilon_and_sign_calculation
 from gci.model import apparent_order_function, fixed_point_iter
 
 h1, h2, h3 = representative_grid_size(2583006, 678911, 93188, 1/3)
 r21, r32 = refinement_factor(h1, h2, h3)
-ep21, ep32, s = sign_calculation(1.05100, 1.03460, 0.88580)
+ep21, ep32, s = epsilon_and_sign_calculation(1.05100, 1.03460, 0.88580)
 init_value = 1
 
 
