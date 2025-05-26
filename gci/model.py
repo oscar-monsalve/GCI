@@ -1,36 +1,39 @@
-import logging
+from logging import warning
 from math import log
 
 
-# Rewrite without using strings as input from the user. Just integers (1,2,3)
 def physical_dimension_prompt() -> float:
-    """Returns the numerical value of f (1/2 or 1/3) prompting the user for the grid's dimensions."""
+    """Returns the numerical value of f (1, 1/2 or 1/3) prompting the user for the grid's dimensions."""
     while True:
-        dimension = input("Type '2D' or '3D' if your simulation is in two or three dimensions, respectively: ")
-        if dimension == "2D" or dimension == "2d" or dimension == "3D" or dimension == "3d":
-            if dimension == "2D" or dimension == "2d":
-                return 1/2
-            elif dimension == "3D" or dimension == "3d":
-                return 1/3
-            break
-        else:
-            raise TypeError("Insert a valid argument for the dimensions of the problem. Enter either (2D, 2d), or (3D, 3d).\n")
+        dimension = input("Type '1', '2' or '3' if your simulation is in one (1D), two (2D) or three (3D) dimensions, respectively: ")
+        if dimension not in ("1", "2", "3"):
+            print("Insert a valid argument for the dimensions of the problem. Enter either '1', '2' or '3'.\n")
             continue
+        match dimension:
+            case "1":
+                return 1.0
+            case "2":
+                return 1.0/2
+            case "3":
+                return 1.0/3
 
 
 def physical_dimension_no_prompt(dimension: str) -> float:
     """
-    Returns the numerical value of f (1/2 or 1/3) according to the manually-given grid's dimensions.
+    Returns the numerical value of f (1, 1/2 or 1/3) according to the manually-given grid's dimensions.
 
     Args:
     dimension: "2d" or "3d", according to the grid's dimensions.
     """
-    if dimension == "2D" or dimension == "2d":
-        return 1/2
-    elif dimension == "3D" or dimension == "3d":
-        return 1/3
-    else:
+    if dimension not in ("1", "2", "3"):
         raise TypeError("Insert a valid argument for the dimensions of the problem. Enter either (2D, 2d), or (3D, 3d) as strings.\n")
+    match dimension:
+        case "1":
+            return 1.0
+        case "2":
+            return 1.0/2
+        case "3":
+            return 1.0/3
 
 
 def representative_grid_size(n1: int, n2: int, n3: int, f: float) -> [float, float, float]:
@@ -60,9 +63,9 @@ def refinement_factor(h1: float, h2: float, h3: float) -> [float, float]:
 
 def check_refinement_factor(r21: float, r32: float) -> None:
     if r21 <= 1.3:
-        logging.warning(f"It is recommended that the refinement factor r21={r21:.2f} is greater than 1.3.\n")
+        warning(f"It is recommended that the refinement factor r21={r21:.2f} is greater than 1.3.\n")
     elif r32 <= 1.3:
-        logging.warning(f"It is recommended that the refinement factor r32={r32:.2f} is greater than 1.3.\n")
+        warning(f"It is recommended that the refinement factor r32={r32:.2f} is greater than 1.3.\n")
     else:
         return
 
