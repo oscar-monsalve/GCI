@@ -1,5 +1,5 @@
 from logging import warning
-from math import log
+from math import log, isinf
 
 
 def physical_dimension_prompt() -> float:
@@ -96,7 +96,8 @@ def check_convergence_condition(ep21: float, ep32: float) -> None:
 
     # Monotonic convergence
     if convergence_condition > 0 and convergence_condition < 1:
-        print("Monotonic convergence detected. The GCI results should be acceptable in terms of working intent.")
+        print("(OK) Monotonic convergence detected. The GCI results should be acceptable in terms of working intent.")
+        # print("(OK) Monotonic convergence detected. The GCI procedure works best for this type of convergence condition.")
     # Oscillatory convergence
     elif convergence_condition > -1 and convergence_condition < 0:
         warning("Oscillatory convergence detected. For these cases, the GCI results might be fine, but sometimes it could increase the uncertainty of the results.")
@@ -191,3 +192,21 @@ def gci(r21: float, r32: float, e21_a: float, e32_a: float, aparent_order: float
     gci21_fine = ((1.25*e21_a)/((r21**aparent_order)-1))
     gci32_medium = ((1.25*e32_a)/((r32**aparent_order)-1))
     return gci21_fine, gci32_medium
+
+
+def asymptotic_range(gci21_fine: float, gci32_medium: float, refinement_factor: float, aparent_order: float) -> float:
+    return (refinement_factor ** aparent_order) * (gci21_fine / gci32_medium)
+    # return (gci32_medium)/((refinement_factor ** aparent_order) * gci21_fine)
+
+
+def is_close(n1: float, n2: float, rel_tol=1e-10, abs_tol=0.0) -> bool:
+    # check on the input tolerances
+    if rel_tol < 0 or abs_tol < 0:
+        raise ValueError("tolerances must be non-negative")
+    # check for infinities
+    if isinf(n1) or isinf(n2):
+        return False
+    # check for equality
+    if n1 == n2:
+        return True
+    return abs(n1 - n2) <= max(rel_tol * max(abs(n1), abs(n2)), abs_tol)

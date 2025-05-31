@@ -52,7 +52,7 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "3"
+dimension: str = "2"
 n1:        int = 18000
 n2:        int = 8000
 n3:        int = 4500
@@ -84,7 +84,6 @@ def main() -> None:
     e21_a, e32_a = model.approximate_relative_errors(phi1, phi2, phi3)  # Approximate relative errors
     e21_ext, e32_ext = model.extrapolated_relative_errors(phi1, phi2, phi21_ext, phi32_ext)  # Define the extrapolated relative errors
     gci21_fine, gci32_medium = model.gci(r21, r32, e21_a, e32_a, aparent_order)  # Convergence index results for the fine and medium grids
-    # GCI = (gci32_medium)/((r21**aparent_order) * gci21_fine)  # define the approximate constancy GCI
 
     # Output table summarizing the GCI results using the package "prettytable".
     table = PrettyTable()
@@ -105,8 +104,10 @@ def main() -> None:
     table.add_row(["e_32_ext (%)",      f"{e32_ext:.4f}",       "Coarse-to-medium extrapolated relative error"])
     table.add_row(["GCI_21_fine (%)",   f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
     table.add_row(["GCI_32_medium (%)", f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
-    table.add_row(["Notes:", "", ""])
-    # table.add_row(["GCI", format(GCI, ".4f")])
+    if (model.is_close(r21, r32)):
+        asymptotic_range = model.asymptotic_range(gci21_fine, gci32_medium, r21, aparent_order)
+        table.add_row(["AR", f"{asymptotic_range: .4f}", "Asymptotic range (since r21==r32)"])
+    # table.add_row(["Notes", "", ""])
     print()
     print("Grid Convergence Index (GCI) results:")
     print(table)

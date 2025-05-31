@@ -51,7 +51,7 @@ def main() -> None:
         e21_ext, e32_ext = model.extrapolated_relative_errors(phi1, phi2, phi21_ext, phi32_ext)
 
         # Define the GCI values for the fine and medium grids
-        gci21_fine, gci32_medium = model.gci(r21, r32, e21_a, e32_a, aparent_order)
+        gci21_fine, gci32_medium = model.asymptotic_range(r21, r32, e21_a, e32_a, aparent_order)
 
         # define the approximate constancy GCI
         # GCI = (gci32_medium)/((r21**aparent_order) * gci21_fine)
