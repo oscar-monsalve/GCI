@@ -26,8 +26,8 @@ Note: this code is at its first implementation iteration, meaning it can be impr
 
 - [x] Add warnings for refinement ratio (r>1.3).
 - [x] Add calculations for 1D geometries.
-- [ ] Add convergence condition (monotonic convergence, oscillatory conv, etc). If divergent print warning.
-- [ ] Add asymptotic range (calculate only if r21 = r32).
+- [x] Add convergence condition (monotonic convergence, oscillatory conv, etc). If divergent print warning.
+- [x] Add asymptotic range (calculate only if r21 = r32).
 - [ ] Add latex, word, markdown tables for reporting results.
 - [ ] Calculate results for more than one CFD solution at a time.
 - [ ] Add calculations for variable length, area or volume for the simulation domain.
