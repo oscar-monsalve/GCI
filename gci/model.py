@@ -194,9 +194,8 @@ def gci(r21: float, r32: float, e21_a: float, e32_a: float, aparent_order: float
     return gci21_fine, gci32_medium
 
 
-def asymptotic_range(gci21_fine: float, gci32_medium: float, refinement_factor: float, aparent_order: float) -> float:
-    return (refinement_factor ** aparent_order) * (gci21_fine / gci32_medium)
-    # return (gci32_medium)/((refinement_factor ** aparent_order) * gci21_fine)
+def asymptotic_range(gci21_fine: float, gci32_medium: float, r21: float, aparent_order: float) -> float:
+    return (r21 ** aparent_order) * (gci21_fine / gci32_medium)
 
 
 def is_close(n1: float, n2: float, rel_tol=1e-10, abs_tol=0.0) -> bool:
