@@ -60,6 +60,7 @@ phi1:    float = 1.05100
 phi2:    float = 1.03460
 phi3:    float = 0.88580
 # --------------------------------------Inputs--------------------------------------
+# --------------------------------------Inputs--------------------------------------
 
 
 def main() -> None:
@@ -106,7 +107,7 @@ def main() -> None:
     table.add_row(["GCI_21_fine (%)",       f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
     table.add_row(["GCI_32_medium (%)",     f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
     table.add_row(["Asymptotic_range (AR)", f"{asympt_range: .4f}", "A value near 1 indicates mesh convergence and minimal gain from further refinement."])
-    table.add_row(["Notes", "", ""])
+    # table.add_row(["Notes", "", ""])
     print()
 
     # Check GCI conditions
@@ -126,6 +127,7 @@ def main() -> None:
         f_print = "1/3"
 
     # Plotting the grid size h vs. the solution grid value phi
+    h1, h2, h3 = h1*1000, h2*1000, h3*1000
     hi = [h1, h2, h3]
     y = [phi1, phi2, phi3]
     phi_ext_x = [0, h1]
@@ -135,16 +137,30 @@ def main() -> None:
     plt.plot(0, phi21_ext, '*r', markersize=9, label="Richardson extrapolation")
     plt.plot(phi_ext_x, phi_ext_y, 'r--')
 
-    plt.title(r"$h_i$ vs. $\phi_i$", fontsize=16)
-    plt.xlabel(fr"$h_i=\left(  1/N_i \right)^{{{f_print}}}$", fontsize=16)
+    plt.xlabel(fr"$h_i=\left(  1/N_i \right)^{{{f_print}}}\; (\times 10^{{-3}})$", fontsize=16)
     plt.ylabel(r"$\phi_i$", fontsize=16)
-    plt.legend(fontsize=12)
+    plt.legend(fontsize=10, loc='lower left')
+    plt.xticks(range(-2, int(h3)+4, 2), fontsize=12)
+    plt.yticks(fontsize=12)
+    plt.xlim(-2, int(h3)+2)
 
-    plt.xlim(-0.002, None)
+    plt.annotate(
+        fr'$GCI_{{medium}}^{{32}}={{{gci32_medium:.3f}}}\;\%$',
+        xy=(0.015, 0.2),
+        xycoords='axes fraction',
+        fontsize=14,
+    )
+
+    plt.annotate(
+        fr'$GCI_{{fine}}^{{21}}={{{gci21_fine:.3f}}}\;\%$',
+        xy=(0.015, 0.3),
+        xycoords='axes fraction',
+        fontsize=14,
+    )
 
     plt.annotate(
         r'$N_1$',
-        xy=(h1, phi1),
+        xy=(1.1*h1, phi1),
         horizontalalignment='center',
         verticalalignment='bottom',
         fontsize=14,
@@ -152,7 +168,7 @@ def main() -> None:
 
     plt.annotate(
         r'$N_2$',
-        xy=(h2, phi2),
+        xy=(h2 + 0.1*h1, phi2),
         horizontalalignment='center',
         verticalalignment='bottom',
         fontsize=14,
@@ -160,7 +176,7 @@ def main() -> None:
 
     plt.annotate(
         r'$N_3$',
-        xy=(h3, phi3),
+        xy=(h3 + 0.1*h1, phi3),
         horizontalalignment='center',
         verticalalignment='bottom',
         fontsize=14,
