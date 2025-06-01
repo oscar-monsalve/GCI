@@ -52,13 +52,13 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "2"
-n1:        int = 18000
-n2:        int = 9000
-n3:        int = 4500
-phi1:    float = 6.063
-phi2:    float = 5.972
-phi3:    float = 5.863
+dimension: str = "3"
+n1:        int = 2583006
+n2:        int = 678911
+n3:        int = 93188
+phi1:    float = 1.05100
+phi2:    float = 1.03460
+phi3:    float = 0.88580
 # --------------------------------------Inputs--------------------------------------
 
 
@@ -84,36 +84,38 @@ def main() -> None:
     e21_a, e32_a = model.approximate_relative_errors(phi1, phi2, phi3)  # Approximate relative errors
     e21_ext, e32_ext = model.extrapolated_relative_errors(phi1, phi2, phi21_ext, phi32_ext)  # Define the extrapolated relative errors
     gci21_fine, gci32_medium = model.gci(r21, r32, e21_a, e32_a, aparent_order)  # Convergence index results for the fine and medium grids
-    asymptotic_range = model.asymptotic_range(gci21_fine, gci32_medium, r21, aparent_order)
+    asympt_range = model.asymptotic_range(gci21_fine, gci32_medium, r21, aparent_order)
 
     # Output table summarizing the GCI results using the package "prettytable".
     table = PrettyTable()
     table.field_names = ["Parameters", "Results", "Description"]
-    table.add_row(["N1",                n1,                     "Fine grid cell count"])
-    table.add_row(["N2",                n2,                     "Medium grid cell count"])
-    table.add_row(["N3",                n3,                     "Coarse grid cell count"])
-    table.add_row(["r21",               f"{r21:.4f}",           "Medium-to-fine refinement factor"])
-    table.add_row(["r32",               f"{r32:.4f}",           "Coarse-to-medium refinement factor"])
-    table.add_row(["phi1",              f"{phi1:.4f}",          "Fine grid numerical solution"])
-    table.add_row(["phi2",              f"{phi2:.4f}",          "Medium grid numerical solution"])
-    table.add_row(["phi1",              f"{phi3:.4f}",          "Coarse grid numerical solution"])
-    table.add_row(["p",                 f"{aparent_order:.4f}", "Aparent oder"])
-    table.add_row(["phi_ext",           f"{phi21_ext:.4f}",     "Extrapolated solution"])
-    table.add_row(["e_21_a (%)",        f"{e21_a:.4f}",         "Medium-to-fine approximate relative error"])
-    table.add_row(["e_32_a (%)",        f"{e21_a:.4f}",         "Coarse-to-medium approximate relative error"])
-    table.add_row(["e_21_ext (%)",      f"{e21_ext:.4f}",       "Medium-to-fine extrapolated relative error"])
-    table.add_row(["e_32_ext (%)",      f"{e32_ext:.4f}",       "Coarse-to-medium extrapolated relative error"])
-    table.add_row(["GCI_21_fine (%)",   f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
-    table.add_row(["GCI_32_medium (%)", f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
-    table.add_row(["Asymptotic_range (AR)", f"{asymptotic_range: .4f}", "A value near 1 indicates mesh convergence and minimal gain from further refinement."])
+    table.add_row(["N1",                    n1,                     "Fine grid cell count"])
+    table.add_row(["N2",                    n2,                     "Medium grid cell count"])
+    table.add_row(["N3",                    n3,                     "Coarse grid cell count"])
+    table.add_row(["r21",                   f"{r21:.4f}",           "Medium-to-fine refinement factor"])
+    table.add_row(["r32",                   f"{r32:.4f}",           "Coarse-to-medium refinement factor"])
+    table.add_row(["phi1",                  f"{phi1:.4f}",          "Fine grid numerical solution"])
+    table.add_row(["phi2",                  f"{phi2:.4f}",          "Medium grid numerical solution"])
+    table.add_row(["phi1",                  f"{phi3:.4f}",          "Coarse grid numerical solution"])
+    table.add_row(["p",                     f"{aparent_order:.4f}", "Aparent oder"])
+    table.add_row(["phi_ext",               f"{phi21_ext:.4f}",     "Extrapolated solution"])
+    table.add_row(["e_21_a (%)",            f"{e21_a:.4f}",         "Medium-to-fine approximate relative error"])
+    table.add_row(["e_32_a (%)",            f"{e21_a:.4f}",         "Coarse-to-medium approximate relative error"])
+    table.add_row(["e_21_ext (%)",          f"{e21_ext:.4f}",       "Medium-to-fine extrapolated relative error"])
+    table.add_row(["e_32_ext (%)",          f"{e32_ext:.4f}",       "Coarse-to-medium extrapolated relative error"])
+    table.add_row(["GCI_21_fine (%)",       f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
+    table.add_row(["GCI_32_medium (%)",     f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
+    table.add_row(["Asymptotic_range (AR)", f"{asympt_range: .4f}", "A value near 1 indicates mesh convergence and minimal gain from further refinement."])
     table.add_row(["Notes", "", ""])
     print()
-    print("Grid Convergence Index (GCI) results:")
-    print(table)
 
     # Check GCI conditions
     model.check_refinement_factor(r21, r32)
     model.check_convergence_condition(ep21, ep32)
+
+    print()
+    print("Grid Convergence Index (GCI) results:")
+    print(table)
 
     # Assign the variable f to a string to print on the plot result
     if f == 1:
