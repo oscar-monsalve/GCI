@@ -14,12 +14,27 @@ The program asks the user the following:
 
 Note: this code is at its first implementation iteration, meaning it can be improved.
 
-**Dependencies:**
+## Clone repository
+
+Clone the repository:
+
+```shell
+git clone https://github.com/oscar-monsalve/GCI.git
+cd GCI
+```
+
+Dependencies:
 
 - prettytable
 - matplotlib
 - numpy
 - pytest (optional for testing).
+
+To install dependencies, run the following terminal command:
+
+```shell
+pip install -r requirements.txt
+```
 
 
 # TODO
