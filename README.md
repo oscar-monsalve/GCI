@@ -38,12 +38,6 @@ To install dependencies, run the following terminal command:
 pip install -r requirements.txt
 ```
 
-or
-
-```shell
-pipx install -r requirements.txt
-```
-
 Run the main program scripts. If the OS is Windows, run with `python`:
 
 ```shell
