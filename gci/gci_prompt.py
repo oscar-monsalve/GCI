@@ -76,13 +76,13 @@ def main() -> None:
         # Assign the variable f to a string to print on the plot result
         if f == 1:
             f_print = ""
-        if f == 1/2:
+        if f == 1 / 2:
             f_print = "1/2"
-        if f == 1/3:
+        if f == 1 / 3:
             f_print = "1/3"
 
         # Plotting the grid size h vs. the solution grid value phi
-        h1, h2, h3 = h1*1000, h2*1000, h3*1000
+        h1, h2, h3 = h1 * 1000, h2 * 1000, h3 * 1000
         hi = [h1, h2, h3]
         y = [phi1, phi2, phi3]
         phi_ext_x = [0, h1]
@@ -95,9 +95,9 @@ def main() -> None:
         plt.xlabel(fr"$h_i=\left(  1/N_i \right)^{{{f_print}}}\; (\times 10^{{-3}})$", fontsize=16)
         plt.ylabel(r"$\phi_i$", fontsize=16)
         plt.legend(fontsize=10, loc='lower left')
-        plt.xticks(range(-2, int(h3)+4, 2), fontsize=12)
+        plt.xticks(range(-2, int(h3) + 4, 2), fontsize=12)
         plt.yticks(fontsize=12)
-        plt.xlim(-2, int(h3)+2)
+        plt.xlim(-2, int(h3) + 2)
 
         plt.annotate(
             fr'$GCI_{{medium}}^{{32}}={{{gci32_medium:.3f}}}\;\%$',
@@ -115,7 +115,7 @@ def main() -> None:
 
         plt.annotate(
             r'$N_1$',
-            xy=(1.1*h1, phi1),
+            xy=(1.1 * h1, phi1),
             horizontalalignment='center',
             verticalalignment='bottom',
             fontsize=14,
@@ -123,7 +123,7 @@ def main() -> None:
 
         plt.annotate(
             r'$N_2$',
-            xy=(h2 + 0.1*h1, phi2),
+            xy=(h2 + 0.1 * h1, phi2),
             horizontalalignment='center',
             verticalalignment='bottom',
             fontsize=14,
@@ -131,7 +131,7 @@ def main() -> None:
 
         plt.annotate(
             r'$N_3$',
-            xy=(h3 + 0.1*h1, phi3),
+            xy=(h3 + 0.1 * h1, phi3),
             horizontalalignment='center',
             verticalalignment='bottom',
             fontsize=14,
