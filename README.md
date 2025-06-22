@@ -29,7 +29,9 @@ Note: this code is at its first implementation iteration, meaning it can be impr
 - [x] Add convergence condition (monotonic convergence, oscillatory conv, etc). If divergent print warning.
 - [x] Add asymptotic range (calculate only if r21 = r32).
 - [x] Add GCI results within the plot
-- [ ] Add latex, word, markdown tables for reporting results.
+- [ ] Add python libs requirements in a .txt file.
+- [ ] Calculate desired number of cell for a dersired GCI value.
+- [x] Add latex, word, markdown tables for reporting results.
 - [ ] Calculate results for more than one CFD solution at a time.
 - [ ] Add calculations for variable length, area or volume for the simulation domain.
 - [ ] Add calculation for local GCI to report error bars on a result along a plane/profile/surface (Last part of Celik, et al.)
