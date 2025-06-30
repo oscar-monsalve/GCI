@@ -29,7 +29,6 @@ Dependencies:
 
 - prettytable
 - matplotlib
-- numpy
 - pytest (optional for testing).
 
 To install dependencies, run the following terminal command:
