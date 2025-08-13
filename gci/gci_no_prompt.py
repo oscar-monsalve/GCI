@@ -52,13 +52,13 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "3"
-n1:        int = 2583006
-n2:        int = 678911
-n3:        int = 93188
-phi1:    float = 1.05100
-phi2:    float = 1.03460
-phi3:    float = 0.88580
+dimension: str = "2"
+n1:        int = 18000
+n2:        int = 8000
+n3:        int = 4500
+phi1:    float = 6.063
+phi2:    float = 5.972
+phi3:    float = 5.863
 # --------------------------------------Inputs--------------------------------------
 
 def main() -> None:
@@ -88,6 +88,8 @@ def main() -> None:
     # Output table summarizing the GCI results using the package "prettytable".
     table = PrettyTable()
     table.field_names = ["Parameters", "Results", "Description"]
+    table.align = "l"
+
     table.add_row(["N1",                    n1,                     "Fine grid cell count"])
     table.add_row(["N2",                    n2,                     "Medium grid cell count"])
     table.add_row(["N3",                    n3,                     "Coarse grid cell count"])
@@ -104,7 +106,7 @@ def main() -> None:
     table.add_row(["e_32_ext (%)",          f"{e32_ext:.4f}",       "Coarse-to-medium extrapolated relative error"])
     table.add_row(["GCI_21_fine (%)",       f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
     table.add_row(["GCI_32_medium (%)",     f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
-    table.add_row(["Asymptotic_range (AR)", f"{asympt_range: .4f}", "A value near 1 indicates mesh convergence and minimal gain from further refinement."])
+    table.add_row(["Asymptotic_range (AR)", f"{asympt_range: .4f}", "A value near 1 indicates mesh convergence and\nminimal gain from further refinement."])
     # table.add_row(["Notes", "", ""])
     print()
 
