@@ -89,8 +89,8 @@ def check_convergence_condition(ep21: float, ep32: float) -> None:
 
     # Monotonic convergence
     if convergence_condition > 0 and convergence_condition < 1:
-        print("(OK) Monotonic convergence detected. The GCI results should be acceptable in terms of working intent.")
-        # print("(OK) Monotonic convergence detected. The GCI procedure works best for this type of convergence condition.")
+        print("(OK) Monotonic convergence.")
+        # print("(OK) Monotonic convergence detected. The GCI results should be acceptable in terms of working intent.")
     # Oscillatory convergence
     elif convergence_condition > -1 and convergence_condition < 0:
         warning("Oscillatory convergence detected. For these cases, the GCI results might be fine, but sometimes it could increase the uncertainty of the results.")
