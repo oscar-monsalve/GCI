@@ -89,18 +89,18 @@ def check_convergence_condition(ep21: float, ep32: float) -> None:
 
     # Monotonic convergence
     if convergence_condition > 0 and convergence_condition < 1:
-        print("(OK) Monotonic convergence.")
+        print(f"(OK) Monotonic convergence. Convergence ratio e_21/e32: {convergence_condition:.4f}.")
         # print("(OK) Monotonic convergence detected. The GCI results should be acceptable in terms of working intent.")
     # Oscillatory convergence
     elif convergence_condition > -1 and convergence_condition < 0:
-        warning("Oscillatory convergence detected. For these cases, the GCI results might be fine, but sometimes it could increase the uncertainty of the results.")
+        warning(f"Oscillatory convergence detected. Convergence ratio e_21/e32: {convergence_condition:.4f}. For this case, the GCI results might be fine, but sometimes it could increase the uncertainty of the results.")
         warning("If the GCI results are not satisfactory, it is recommended to remesh and aim for monotonic convergence.")
     # Monotonic divergence
     elif convergence_condition > 1:
-        warning("Monotonic divergence detected. It is recommended to remesh and aim for a monotonic convergence solution.")
+        warning(f"Monotonic divergence detected. Convergence ratio e_21/e32: {convergence_condition:.4f}. It is recommended to remesh and aim for a monotonic convergence solution.")
     # Oscillatory divergence
     elif convergence_condition < -1:
-        warning("Oscillatory divergence detected. It is recommended to remesh and aim for a monotonic convergence solution.")
+        warning(f"Oscillatory divergence detected. Convergence ratio e_21/e32: {convergence_condition:.4f}. It is recommended to remesh and aim for a monotonic convergence solution.")
 
 def fixed_point_iter(apparent_order_function, init_value: int, tol=1e-6, max_iter=100) -> [float, int]:
     """

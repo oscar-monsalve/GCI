@@ -106,7 +106,7 @@ def main() -> None:
     table.add_row(["e_32_ext (%)",          f"{e32_ext:.4f}",       "Coarse-to-medium extrapolated relative error"])
     table.add_row(["GCI_21_fine (%)",       f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
     table.add_row(["GCI_32_medium (%)",     f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
-    table.add_row(["Asymptotic_range (AR)", f"{asympt_range: .4f}", "A value near 1 indicates mesh convergence and\nminimal gain from further refinement."])
+    table.add_row(["Asymptotic_range (AR)", f"{asympt_range:.4f}", "A value near 1 indicates mesh convergence and\nminimal gain from further refinement."])
     # table.add_row(["Notes", "", ""])
     print()
 
