@@ -183,8 +183,22 @@ def gci(r21: float, r32: float, e21_a: float, e32_a: float, aparent_order: float
 def asymptotic_range(gci21_fine: float, gci32_medium: float, r21: float, aparent_order: float) -> float:
     return (r21 ** aparent_order) * (gci21_fine / gci32_medium)
 
-def desired_cells():
-    pass
+def required_cells(desired_gci: None | float, gci21_fine: float, f: float, n1: float, p: float) -> int | None:
+    """
+    Returns the required cell count to achieve a desired GCI value.
+
+    Args:
+    desired_gci: desired GCI value as a percentage (%).
+    gci21_fine: medium-to-fine GCI result.
+    f: physical dimension of the simulation.
+    n1: fine grid cell count.
+    p: aparent order.
+    """
+    if desired_gci is None:
+        return
+    if desired_gci is not None:
+        r_desired = (gci21_fine / desired_gci) ** (1.0/p)
+        return int((r_desired ** f) * n1)
 
 def is_close(n1: float, n2: float, rel_tol=1e-10, abs_tol=0.0) -> bool:
     # check on the input tolerances

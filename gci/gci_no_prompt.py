@@ -1,12 +1,13 @@
 # --------------------------------------Grid Convergence Index (GCI)--------------------------------------
 # ----Input description----
-# 'dimension': Physical dimension of the grid to analyze. Enter "1", "2", or "3".
-# 'n1':        Fine grid cell count
-# 'n2':        Medium grid cell count
-# 'n3':        Coarse grid cell count
-# 'phi1':      CFD solution for the fine gri
-# 'phi2':      CFD solution for the medium grid
-# 'phi3':      CFD solution for the coarse grid
+# 'dimension':   Physical dimension of the grid to analyze. Enter "1", "2", or "3".
+# 'n1':          Fine grid cell count
+# 'n2':          Medium grid cell count
+# 'n3':          Coarse grid cell count
+# 'phi1':        CFD solution for the fine gri
+# 'phi2':        CFD solution for the medium grid
+# 'phi3':        CFD solution for the coarse grid
+# 'desired_gci': Desired GCI value (as %) to find the required cells to achieve it. It is optional (None or float).
 
 # ----Input data examples from ASME's article (https://doi.org/10.1115/1.2960953)----
 # 2d grid monotonic convergence:
@@ -52,13 +53,14 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension: str = "2"
-n1:        int = 18000
-n2:        int = 8000
-n3:        int = 4500
-phi1:    float = 6.063
-phi2:    float = 5.972
-phi3:    float = 5.863
+dimension:   str = "2"
+n1:          int = 18000
+n2:          int = 8000
+n3:          int = 4500
+phi1:        float = 6.063
+phi2:        float = 5.972
+phi3:        float = 5.863
+desired_gci: float | None = 2.0
 # --------------------------------------Inputs--------------------------------------
 
 def main() -> None:
@@ -85,6 +87,8 @@ def main() -> None:
     gci21_fine, gci32_medium = model.gci(r21, r32, e21_a, e32_a, aparent_order)  # Convergence index results for the fine and medium grids
     asympt_range = model.asymptotic_range(gci21_fine, gci32_medium, r21, aparent_order)
 
+    required_cells = model.required_cells(desired_gci, gci21_fine, f, n1, aparent_order)
+
     # Output table summarizing the GCI results using the package "prettytable".
     table = PrettyTable()
     table.field_names = ["Parameters", "Results", "Description"]
@@ -106,7 +110,11 @@ def main() -> None:
     table.add_row(["e_32_ext (%)",          f"{e32_ext:.4f}",       "Coarse-to-medium extrapolated relative error"])
     table.add_row(["GCI_21_fine (%)",       f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
     table.add_row(["GCI_32_medium (%)",     f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
-    table.add_row(["Asymptotic_range (AR)", f"{asympt_range:.4f}", "A value near 1 indicates mesh convergence and\nminimal gain from further refinement."])
+    table.add_row(["Asymptotic_range (AR)", f"{asympt_range:.4f}", "AR~1 indicates mesh convergence and minimal gain from further refinement."])
+    if required_cells is None:
+        table.add_row(["N_required",        f"{required_cells}", "Set a desired GCI value to calculate the required cell count."])
+    if required_cells is not None:
+        table.add_row(["N_required",        f"{required_cells}", f"Required cells for a desired GCI value of {desired_gci:.2f}%"])
     # table.add_row(["Notes", "", ""])
     print()
 
