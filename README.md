@@ -37,7 +37,7 @@ To install dependencies, run the following terminal command:
 pip install -r requirements.txt
 ```
 
-Run the main program scripts. If the OS is Windows, run with `python`:
+Run the main program scripts. If the Operating System is Windows, run with `python`. Otherwise, for Linux systems in general:
 
 ```shell
 python3 gci/no_prompt.py
@@ -59,7 +59,7 @@ python3 gci/gci_prompt.py
 - [x] Add GCI results within the plot
 - [x] Add python libs requirements in a .txt file.
 - [x] Calculate desired number of cell for a dersired GCI value.
+- [ ] Add calculation for local GCI to report error bars on a result along a plane/profile/surface (Last part of Celik, et al.)
 - [ ] Add latex, word, markdown tables for reporting results.
 - [ ] Calculate results for more than one CFD solution at a time.
 - [ ] Add calculations for variable length, area or volume for the simulation domain.
-- [ ] Add calculation for local GCI to report error bars on a result along a plane/profile/surface (Last part of Celik, et al.)
