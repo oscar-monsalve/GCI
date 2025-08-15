@@ -17,7 +17,7 @@ def main() -> None:
         h1, h2, h3 = model.representative_grid_size(n1, n2, n3, f)
         r21, r32 = model.refinement_factor(h1, h2, h3)
 
-        # Promt for the grid solutions
+        # Prompt for the grid solutions
         phi1 = float(input("Enter the grid solution value for the fine grid N1: "))
         phi2 = float(input("Enter the grid solution value for the medium grid N2: "))
         phi3 = float(input("Enter the grid solution value for the coarse grid N3: "))
@@ -45,6 +45,8 @@ def main() -> None:
         # Output table summarizing the GCI results using the package "prettytable".
         table = PrettyTable()
         table.field_names = ["Parameters", "Results", "Description"]
+        table.align = "l"
+
         table.add_row(["N1",                    n1,                     "Fine grid cell count"])
         table.add_row(["N2",                    n2,                     "Medium grid cell count"])
         table.add_row(["N3",                    n3,                     "Coarse grid cell count"])
@@ -61,7 +63,7 @@ def main() -> None:
         table.add_row(["e_32_ext (%)",          f"{e32_ext:.4f}",       "Coarse-to-medium extrapolated relative error"])
         table.add_row(["GCI_21_fine (%)",       f"{gci21_fine:.4f}",    "Fine grid convergence index result"])
         table.add_row(["GCI_32_medium (%)",     f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
-        table.add_row(["Asymptotic_range (AR)", f"{asympt_range: .4f}", "A value near 1 indicates mesh convergence and minimal gain from further refinement."])
+        table.add_row(["Asymptotic_range (AR)", f"{asympt_range: .4f}", "AR~1 indicates mesh convergence and minimal gain from further refinement."])
         # table.add_row(["Notes", "", ""])
         print()
 
@@ -147,13 +149,31 @@ def main() -> None:
 
         plt.show()
 
+        # Prompt if the users wants to give a value for a GCI to calculate the required cell count to achieve it
+        calculate_required_cells = input("Do you want to provide a desired GCI value to calculate the required cells to achieve it? (y/n): ")
+
+        if calculate_required_cells == "n":
+            required_cells = None
+            pass
+        if calculate_required_cells == "y":
+            while True:
+                try:
+                    desired_gci = float(input("Enter a desired GCI value as porcentage (e.g., 2.0): "))
+                    break
+                except TypeError as e:
+                    print(f"{e}. Enter a desired GCI value as porcentage, e.g., 2.0")
+                    continue
+            required_cells = model.required_cells(desired_gci, gci21_fine, f, n1, aparent_order)
+            print(f"\nRequired cells for a desired GCI value of {desired_gci:.2f}%:")
+            print(f"{int(required_cells)}")
+
         print()
-        repeat_input = input("Do you want to calculate the GCI with different values? (y/n): ")
+        repeat_input = input("Do you want to reset calculations for different input values? (y/n): ")
         print()
 
         if repeat_input == "y":
             continue
-        else:
+        if repeat_input == "n":
             print("Program finished\n")
             break
 

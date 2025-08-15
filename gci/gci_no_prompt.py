@@ -86,7 +86,6 @@ def main() -> None:
     e21_ext, e32_ext = model.extrapolated_relative_errors(phi1, phi2, phi21_ext, phi32_ext)  # Define the extrapolated relative errors
     gci21_fine, gci32_medium = model.gci(r21, r32, e21_a, e32_a, aparent_order)  # Convergence index results for the fine and medium grids
     asympt_range = model.asymptotic_range(gci21_fine, gci32_medium, r21, aparent_order)
-
     required_cells = model.required_cells(desired_gci, gci21_fine, f, n1, aparent_order)
 
     # Output table summarizing the GCI results using the package "prettytable".
