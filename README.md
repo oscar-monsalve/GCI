@@ -58,7 +58,7 @@ python3 gci/gci_prompt.py
 - [x] Add asymptotic range (calculate only if r21 = r32).
 - [x] Add GCI results within the plot
 - [x] Add python libs requirements in a .txt file.
-- [ ] Calculate desired number of cell for a dersired GCI value.
+- [x] Calculate desired number of cell for a dersired GCI value.
 - [ ] Add latex, word, markdown tables for reporting results.
 - [ ] Calculate results for more than one CFD solution at a time.
 - [ ] Add calculations for variable length, area or volume for the simulation domain.
