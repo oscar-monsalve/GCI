@@ -69,6 +69,14 @@ def main() -> None:
     r21, r32 = model.refinement_factor(h1, h2, h3)
     ep21, ep32, s = model.epsilon_and_sign_calculation(phi1, phi2, phi3)
 
+    # Assign the variable f to a string to print on the plot result
+    if f == 1:
+        f_print = ""
+    if f == 1 / 2:
+        f_print = "1/2"
+    if f == 1 / 3:
+        f_print = "1/3"
+
     def apparent_order_wrapper(x):
         """
         Since the "fixed_point_iter" function expects a function with a single argument, this wrapper function is
@@ -124,14 +132,6 @@ def main() -> None:
     print()
     print("Grid Convergence Index (GCI) results:")
     print(table)
-
-    # Assign the variable f to a string to print on the plot result
-    if f == 1:
-        f_print = ""
-    if f == 1 / 2:
-        f_print = "1/2"
-    if f == 1 / 3:
-        f_print = "1/3"
 
     # Plotting the grid size h vs. the solution grid value phi
     h1, h2, h3 = h1 * 1000, h2 * 1000, h3 * 1000
