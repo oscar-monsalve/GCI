@@ -50,7 +50,7 @@ python3 gci/gci_prompt.py
 
 ## Examples
 
-1. The following case corresponds to a 2D grid with ==monotonic convergence==. The input data are from the ASME's
+1. The following case corresponds to a 2D grid with **monotonic convergence**. The input data are from the ASME's
 original article on ["Procedure for Estimation and Reporting of Uncertainty Due to Discretization in CFD Applications"](https://doi.org/10.1115/1.2960953).
 
 Change the following variables at ```gci/gci_no_prompt.py```. The variable `desired_gci` is set to None for now:
@@ -107,6 +107,8 @@ Grid Convergence Index (GCI) results:
     <figcaption>Figure 1. Monotonic convergence.</figcaption>
     <br>
 </figure>
+
+<br>
 
 
 
