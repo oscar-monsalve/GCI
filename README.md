@@ -103,8 +103,8 @@ Grid Convergence Index (GCI) results:
 ```
 
 <figure>
-    <img src="images/01_monotonic convergence.png" alt="GCI results plot" width="300" height="auto"/>
-    <figcaption>Figure 1. Monotonic convergence.</figcaption>
+    <img src="images/01_monotonic convergence.png" alt="GCI results plot" width="500" height="auto"/>
+    <figcaption>Figure 1. Monotonic convergence case plot result.</figcaption>
     <br>
 </figure>
 
