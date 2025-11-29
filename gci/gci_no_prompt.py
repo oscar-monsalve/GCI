@@ -11,41 +11,46 @@
 
 # ----Input data examples from ASME's article (https://doi.org/10.1115/1.2960953)----
 # 2d grid monotonic convergence:
-# dimension: str = "2"
-# n1:        int = 18000
-# n2:        int = 8000
-# n3:        int = 4500
-# phi1:    float = 6.063
-# phi2:    float = 5.972
-# phi3:    float = 5.863
+# dimension:            str = "2"
+# n1:                   int = 18000
+# n2:                   int = 8000
+# n3:                   int = 4500
+# phi1:               float = 6.063
+# phi2:               float = 5.972
+# phi3:               float = 5.863
+# desired_gci: float | None = None
 
 # 2d p-value<1 monotonic convergence:
-# dimension: str = "2"
-# n1:        int = 18000
-# n2:        int = 4500
-# n3:        int = 980
-# phi1:    float = 10.7880
-# phi2:    float = 10.7250
-# phi3:    float = 10.6050
+# dimension:            str = "2"
+# n1:                   int = 18000
+# n2:                   int = 4500
+# n3:                   int = 980
+# phi1:               float = 10.7880
+# phi2:               float = 10.7250
+# phi3:               float = 10.6050
+# desired_gci: float | None = None
 
 # 2d grid oscillatory convergence:
-# dimension: str = "2"
-# n1:        int = 18000
-# n2:        int = 4500
-# n3:        int = 980
-# phi1:    float = 6.0042
-# phi2:    float = 5.9624
-# phi3:    float = 6.0909
+# dimension:            str = "2"
+# n1:                   int = 18000
+# n2:                   int = 4500
+# n3:                   int = 980
+# phi1:               float = 6.0042
+# phi2:               float = 5.9624
+# phi3:               float = 6.0909
+# desired_gci: float | None = None
 
 # ----Input 3d grid data examples from master thesis (https://repositorio.itm.edu.co/handle/20.500.12622/6477)----
 # 3d grid monotonic convergence:
-# dimension: str = "3"
-# n1:        int = 2583006
-# n2:        int = 678911
-# n3:        int = 93188
-# phi1:    float = 1.05100
-# phi2:    float = 1.03460
-# phi3:    float = 0.88580
+# dimension:            str = "3"
+# n1:                   int = 2583006
+# n2:                   int = 678911
+# n3:                   int = 93188
+# phi1:               float = 1.05100
+# phi2:               float = 1.03460
+# phi3:               float = 0.88580
+# desired_gci: float | None = None
+
 # --------------------------------------Grid Convergence Index (GCI)--------------------------------------
 
 import matplotlib.pyplot as plt
@@ -53,13 +58,13 @@ from prettytable import PrettyTable
 import model
 
 # --------------------------------------Inputs--------------------------------------
-dimension:   str = "2"
-n1:          int = 18000
-n2:          int = 8000
-n3:          int = 4500
-phi1:        float = 6.063
-phi2:        float = 5.972
-phi3:        float = 5.863
+dimension:            str = "2"
+n1:                   int = 18000
+n2:                   int = 8000
+n3:                   int = 4500
+phi1:               float = 6.063
+phi2:               float = 5.972
+phi3:               float = 5.863
 desired_gci: float | None = None
 # --------------------------------------Inputs--------------------------------------
 
