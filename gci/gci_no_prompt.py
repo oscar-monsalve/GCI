@@ -60,7 +60,7 @@ n3:          int = 4500
 phi1:        float = 6.063
 phi2:        float = 5.972
 phi3:        float = 5.863
-desired_gci: float | None = 2.0
+desired_gci: float | None = None
 # --------------------------------------Inputs--------------------------------------
 
 def main() -> None:
@@ -119,7 +119,7 @@ def main() -> None:
     table.add_row(["GCI_32_medium (%)",     f"{gci32_medium:.4f}",  "Medium grid convergence index result"])
     table.add_row(["Asymptotic_range (AR)", f"{asympt_range:.4f}", "AR~1 indicates mesh convergence and minimal gain from further refinement."])
     if required_cells is None:
-        table.add_row(["N_required",        f"{required_cells}", "Set a desired GCI value to calculate the required cell count."])
+        pass
     if required_cells is not None:
         table.add_row(["N_required",        f"{required_cells}", f"Required cells for a desired GCI value of {desired_gci:.2f}%"])
     # table.add_row(["Notes", "", ""])
