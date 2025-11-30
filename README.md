@@ -74,7 +74,7 @@ python3 gci/gci_no_prompt.py
 
 The results are presented with a table and a plot:
 
-```console
+```ini
 (OK) Monotonic convergence. Convergence ratio e_21/e32: 0.8349.
 
 Grid Convergence Index (GCI) results:
