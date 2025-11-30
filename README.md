@@ -74,7 +74,7 @@ python3 gci/gci_no_prompt.py
 
 The results are presented with a table and a plot:
 
-```shell
+```text
 (OK) Monotonic convergence. Convergence ratio e_21/e32: 0.8349.
 
 Grid Convergence Index (GCI) results:
@@ -100,27 +100,6 @@ Grid Convergence Index (GCI) results:
 | Asymptotic_range (AR) | 0.9850  | AR~1 indicates mesh convergence and minimal gain from further refinement. |
 +-----------------------+---------+---------------------------------------------------------------------------+
 ```
-
-| Parameter             | Result | Description                                                               |
-|-----------------------|--------|---------------------------------------------------------------------------|
-| N1                    | 18000  | Fine grid cell count                                                      |
-| N2                    | 8000   | Medium grid cell count                                                    |
-| N3                    | 4500   | Coarse grid cell count                                                    |
-| r21                   | 1.5000 | Medium-to-fine refinement factor                                          |
-| r32                   | 1.3333 | Coarse-to-medium refinement factor                                        |
-| phi1                  | 6.0630 | Fine grid numerical solution                                              |
-| phi2                  | 5.9720 | Medium grid numerical solution                                            |
-| phi3                  | 5.8630 | Coarse grid numerical solution                                            |
-| p                     | 1.5340 | Apparent order                                                            |
-| phi_ext               | 6.1685 | Extrapolated solution                                                     |
-| e_21_a (%)            | 1.5009 | Medium-to-fine approximate relative error                                 |
-| e_32_a (%)            | 1.5009 | Coarse-to-medium approximate relative error                               |
-| e_21_ext (%)          | 1.7102 | Medium-to-fine extrapolated relative error                                |
-| e_32_ext (%)          | 3.1855 | Coarse-to-medium extrapolated relative error                              |
-| GCI_21_fine (%)       | 2.1750 | Fine grid convergence index result                                        |
-| GCI_32_medium (%)     | 4.1129 | Medium grid convergence index result                                      |
-| Asymptotic_range (AR) | 0.9850 | AR ≈ 1 indicates mesh convergence and minimal gain from further refinement |
-
 <figure>
     <img src="images/01_monotonic_convergence.png" alt="GCI results plot" width="500" height="auto"/>
     <figcaption>Figure 1. Monotonic convergence case plot result.</figcaption>
