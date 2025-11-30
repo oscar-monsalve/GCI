@@ -72,7 +72,7 @@ Execute the script with:
 python3 gci/gci_no_prompt.py
 ```
 
-The results are presented with table and a plot:
+The results are presented with a table and a plot:
 
 
 ```shell
@@ -175,7 +175,7 @@ Execute the script with:
 python3 gci/gci_no_prompt.py
 ```
 
-The results are presented with table and a plot:
+The results are presented with a table and a plot:
 
 
 ```shell
