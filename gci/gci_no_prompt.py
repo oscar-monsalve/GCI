@@ -65,7 +65,7 @@ n3:                   int = 4500
 phi1:               float = 6.063
 phi2:               float = 5.972
 phi3:               float = 5.863
-desired_gci: float | None = None
+desired_gci: float | None = 2.0
 # --------------------------------------Inputs--------------------------------------
 
 def main() -> None:
