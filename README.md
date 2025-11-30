@@ -74,7 +74,7 @@ python3 gci/gci_no_prompt.py
 
 The results are presented with a table and a plot:
 
-```ini
+```text
 (OK) Monotonic convergence. Convergence ratio e_21/e32: 0.8349.
 
 Grid Convergence Index (GCI) results:
@@ -124,7 +124,7 @@ desired_gci: float | None = 2.0
 The result table will show at the last row the required grid cells to achieve the aforementioned desired GCI as `"N_required"`.
 Note that this results has to be greater than the previous refined cell count `N1`.
 
-```shell
+```text
 (OK) Monotonic convergence. Convergence ratio e_21/e32: 0.8349.
 
 Grid Convergence Index (GCI) results:
@@ -177,7 +177,7 @@ python3 gci/gci_no_prompt.py
 The results are presented with a table and a plot:
 
 
-```shell
+```text
 WARNING:root:Oscillatory convergence detected. Convergence ratio e_21/e32: -0.3253. For this case, the GCI results
 might be fine, but sometimes it could increase the uncertainty of the results.
 WARNING:root:If the GCI results are not satisfactory, it is recommended to remesh and aim for monotonic convergence.
