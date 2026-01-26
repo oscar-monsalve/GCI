@@ -164,7 +164,7 @@ def main() -> None:
                     print(f"{e}. Enter a desired GCI value as porcentage, e.g., 2.0")
                     continue
             required_cells = model.required_cells(desired_gci, gci21_fine, f, n1, aparent_order)
-            print(f"\nRequired cells for a desired GCI value of {desired_gci:.2f}%:")
+            print(f"\nRequired cells for a desired GCI value of {desired_gci}%:")
             print(f"{int(required_cells)}")
 
         print()
