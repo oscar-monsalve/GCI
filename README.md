@@ -1,6 +1,7 @@
 # Grid Convergence Index (GCI)
 
-This code applies the Grid Convergence Index (GCI) method to quantify the grid error for Computational Fluid Dynamics (CFD) applications.
+The present script applies the Grid Convergence Index (GCI) procedure to quantify the uncertainty due to discretization
+in Computational Fluid Dynamics (CFD) applications based on the work of ["Celik I. B et al."](https://doi.org/10.1115/1.2960953).
 
 The program asks the user the following:
 
@@ -88,7 +89,7 @@ Grid Convergence Index (GCI) results:
 | r32                   | 1.3333  | Coarse-to-medium refinement factor                                        |
 | phi1                  | 6.0630  | Fine grid numerical solution                                              |
 | phi2                  | 5.9720  | Medium grid numerical solution                                            |
-| phi1                  | 5.8630  | Coarse grid numerical solution                                            |
+| phi3                  | 5.8630  | Coarse grid numerical solution                                            |
 | p                     | 1.5340  | Aparent oder                                                              |
 | phi_ext               | 6.1685  | Extrapolated solution                                                     |
 | e_21_a (%)            | 1.5009  | Medium-to-fine approximate relative error                                 |
@@ -138,7 +139,7 @@ Grid Convergence Index (GCI) results:
 | r32                   | 1.3333  | Coarse-to-medium refinement factor                                        |
 | phi1                  | 6.0630  | Fine grid numerical solution                                              |
 | phi2                  | 5.9720  | Medium grid numerical solution                                            |
-| phi1                  | 5.8630  | Coarse grid numerical solution                                            |
+| phi3                  | 5.8630  | Coarse grid numerical solution                                            |
 | p                     | 1.5340  | Aparent oder                                                              |
 | phi_ext               | 6.1685  | Extrapolated solution                                                     |
 | e_21_a (%)            | 1.5009  | Medium-to-fine approximate relative error                                 |
@@ -193,7 +194,7 @@ Grid Convergence Index (GCI) results:
 | r32                   | 2.1429  | Coarse-to-medium refinement factor                                        |
 | phi1                  | 6.0042  | Fine grid numerical solution                                              |
 | phi2                  | 5.9624  | Medium grid numerical solution                                            |
-| phi1                  | 6.0909  | Coarse grid numerical solution                                            |
+| phi3                  | 6.0909  | Coarse grid numerical solution                                            |
 | p                     | 1.5077  | Aparent oder                                                              |
 | phi_ext               | 6.0269  | Extrapolated solution                                                     |
 | e_21_a (%)            | 0.6962  | Medium-to-fine approximate relative error                                 |
