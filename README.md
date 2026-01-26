@@ -1,7 +1,7 @@
 # Grid Convergence Index (GCI)
 
 The present script applies the Grid Convergence Index (GCI) procedure to quantify the uncertainty due to discretization
-in Computational Fluid Dynamics (CFD) applications based on the work of ["Celik I. B et al."](https://doi.org/10.1115/1.2960953).
+in Computational Fluid Dynamics (CFD) applications based on the work of [Celik I. B. et al.](https://doi.org/10.1115/1.2960953).
 
 The program asks the user the following:
 
