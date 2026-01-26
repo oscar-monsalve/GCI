@@ -113,7 +113,7 @@ def main() -> None:
     table.add_row(["r32",                   f"{r32:.4f}",           "Coarse-to-medium refinement factor"])
     table.add_row(["phi1",                  f"{phi1:.4f}",          "Fine grid numerical solution"])
     table.add_row(["phi2",                  f"{phi2:.4f}",          "Medium grid numerical solution"])
-    table.add_row(["phi1",                  f"{phi3:.4f}",          "Coarse grid numerical solution"])
+    table.add_row(["phi3",                  f"{phi3:.4f}",          "Coarse grid numerical solution"])
     table.add_row(["p",                     f"{aparent_order:.4f}", "Aparent oder"])
     table.add_row(["phi_ext",               f"{phi21_ext:.4f}",     "Extrapolated solution"])
     table.add_row(["e_21_a (%)",            f"{e21_a:.4f}",         "Medium-to-fine approximate relative error"])
