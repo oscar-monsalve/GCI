@@ -1,3 +1,15 @@
+# Table of Contents
+
+<!-- vim-markdown-toc GFM -->
+
+* [Grid Convergence Index (GCI)](#grid-convergence-index-gci)
+    * [Clone repository](#clone-repository)
+    * [Examples](#examples)
+    * [TODO](#todo)
+
+<!-- vim-markdown-toc -->
+
+
 # Grid Convergence Index (GCI)
 
 The present script applies the Grid Convergence Index (GCI) procedure to quantify the uncertainty due to discretization
